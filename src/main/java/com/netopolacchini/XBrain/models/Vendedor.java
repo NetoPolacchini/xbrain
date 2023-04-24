@@ -1,5 +1,7 @@
 package com.netopolacchini.XBrain.models;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,4 +27,67 @@ public class Vendedor {
     @NotEmpty
     @Size (min=2, max=100)
     private String name;
+
+
+    public Vendedor() {
+    }
+
+    public Vendedor(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Vendedor id(Long id) {
+        setId(id);
+        return this;
+    }
+
+    public Vendedor name(String name) {
+        setName(name);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Vendedor)) {
+            return false;
+        }
+        Vendedor other = (Vendedor) obj;
+        return Objects.equals(this.id, other.id) && Objects.equals(this.name, other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            "}";
+    }
+
+
 }
