@@ -1,12 +1,17 @@
 package com.netopolacchini.XBrain.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +32,9 @@ public class Vendedor {
     @NotEmpty
     @Size (min=2, max=100)
     private String name;
+
+    @OneToMany(mappedBy = "vendedor")
+    private List<Venda> vendas = new ArrayList<Venda>();
 
 
     public Vendedor() {
@@ -62,6 +70,16 @@ public class Vendedor {
         setName(name);
         return this;
     }
+
+    @JsonIgnore
+    public List<Venda> getVendas() {
+        return this.vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
+    }
+
 
     @Override
     public boolean equals(Object obj) {

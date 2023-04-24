@@ -40,10 +40,10 @@ public class VendaController {
     }
 
     @GetMapping ("/vendedor/{vendedorId}")
-    public ResponseEntity<List<Venda>> findAllByVendedorId (@PathVariable Long id){
-        vendedorService.findById(id);
-        List<Venda> vendas = this.vendaService.findAllByVendedorId(id);
-        return ResponseEntity.ok().body(vendas);
+    public ResponseEntity<List<Venda>> findAllByVendedorId (@PathVariable Long vendedorId){
+        vendedorService.findById(vendedorId);
+        List<Venda> objs = this.vendaService.findAllByVendedorId(vendedorId);
+        return ResponseEntity.ok().body(objs);
     }
 
     @PostMapping
