@@ -13,7 +13,7 @@ import com.netopolacchini.XBrain.repositories.VendaRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class VendaServices {
+public class VendaService {
 
     @Autowired
     private VendaRepository vendaRepository;
