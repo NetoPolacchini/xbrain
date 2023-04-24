@@ -24,6 +24,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/vendedor/")
 @Validated
 public class VendedorController {
+
     @Autowired
     private VendedorService vendedorService;
 
@@ -33,7 +34,7 @@ public class VendedorController {
         return ResponseEntity.ok().body(obj);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping
     @Validated
     public ResponseEntity<Void> create (@Valid @RequestBody Vendedor obj){
         this.vendedorService.create(obj);
