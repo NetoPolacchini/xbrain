@@ -3,8 +3,6 @@ package com.netopolacchini.XBrain.models;
 import java.util.Date;
 import java.util.Objects;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
