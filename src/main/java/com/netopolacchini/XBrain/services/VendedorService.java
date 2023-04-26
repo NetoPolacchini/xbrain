@@ -1,5 +1,6 @@
 package com.netopolacchini.XBrain.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class VendedorService {
         return vendedor.orElseThrow( () -> new RuntimeException(
             "Usuário não encontrado! ID: "+id
         ));
+    }
+
+    public List<Vendedor> findAll(){
+        List<Vendedor> vendedores = this.vendedorRepository.findAll();
+        return vendedores;
     }
 
     @Transactional

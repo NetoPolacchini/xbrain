@@ -1,5 +1,6 @@
 package com.netopolacchini.XBrain.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,11 @@ public class VendaService {
 
     public List<Venda> findAllByVendedorId (Long id){
         List<Venda> vendas = this.vendaRepository.findByVendedor_Id(id);
+        return vendas;
+    }
+
+    public List<Venda> findByDateBetween (Date startDate, Date endDate){
+        List<Venda> vendas = this.vendaRepository.findByDateBetween(startDate, endDate);
         return vendas;
     }
 

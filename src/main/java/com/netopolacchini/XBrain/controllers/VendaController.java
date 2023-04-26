@@ -1,7 +1,10 @@
 package com.netopolacchini.XBrain.controllers;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
+
+import javax.swing.text.html.parser.Entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.netopolacchini.XBrain.models.Resumo;
 import com.netopolacchini.XBrain.models.Venda;
+import com.netopolacchini.XBrain.models.Vendedor;
 import com.netopolacchini.XBrain.services.VendaService;
 import com.netopolacchini.XBrain.services.VendedorService;
 
@@ -34,7 +39,7 @@ public class VendaController {
     private VendedorService vendedorService;
 
     @GetMapping ("/{id}")
-    public ResponseEntity<Venda> findByIs(@PathVariable Long id){
+    public ResponseEntity<Venda> findById(@PathVariable Long id){
         Venda obj = this.vendaService.findById(id);
         return ResponseEntity.ok(obj);
     }
@@ -44,6 +49,21 @@ public class VendaController {
         vendedorService.findById(vendedorId);
         List<Venda> objs = this.vendaService.findAllByVendedorId(vendedorId);
         return ResponseEntity.ok().body(objs);
+    }
+
+    @GetMapping ("/vendedor/{vendedorId}/resumo")
+    public ResponseEntity<Resumo> findResumoVendedor (@PathVariable long vendedorId, @RequestBody Date startDate,
+    @RequestBody Date endDate){
+
+        Resumo resumo = new Resumo();
+        Vendedor vendedor = this.vendedorService.findById(vendedorId);
+        List<Venda> vendas = this.vendaService.findByDateBetween(startDate, endDate);
+
+        resumo.setName(vendedor.getName());
+        resumo.setTotalVendas(vendas.size());
+        resumo.setMediaVendas(5);
+
+        return ResponseEntity.ok().body(resumo);
     }
 
     @PostMapping

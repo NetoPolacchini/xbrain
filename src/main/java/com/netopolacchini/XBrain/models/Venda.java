@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table (name = Venda.TABLE_NAME)
@@ -28,7 +30,8 @@ public class Venda {
     @Column (name = "price", nullable = false)
     private float price;
 
-    @Column(name = "date")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date", nullable = false, unique = false)
     private Date date;
 
 
